@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
+            /* Fondo con pilas Tronex */
             background: linear-gradient(rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0.75)), 
                         url('https://images.unsplash.com/photo-1590001158193-790179980bd9?auto=format&fit=crop&q=80');
             background-size: cover;
@@ -25,6 +26,17 @@
         .btn-action {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
+        .input-style {
+            width: 100%;
+            padding: 0.75rem;
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            outline: none;
+            font-size: 0.875rem;
+        }
+        .input-style:focus {
+            box-shadow: 0 0 0 2px #ED1C24;
+        }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
@@ -40,12 +52,17 @@
         <div class="p-6 space-y-5">
             
             <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 shadow-inner">
-                <p class="text-xs font-bold text-gray-500 mb-3 uppercase text-center italic">Identifícate para atención prioritaria</p>
+                <p class="text-xs font-bold text-gray-500 mb-3 uppercase text-center italic">Datos del Cliente</p>
                 <div class="space-y-3">
-                    <input type="text" id="clienteNombre" placeholder="Tu Nombre / Empresa" 
-                           class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none text-sm">
-                    <input type="text" id="clienteCiudad" placeholder="Ciudad o Municipio" 
-                           class="w-full p-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-red-500 outline-none text-sm">
+                    <input type="text" id="clienteNombre" placeholder="Nombre o Empresa" class="input-style">
+                    <input type="tel" id="clienteCelular" placeholder="Tu número de Celular" class="input-style">
+                    <input type="text" id="clienteCiudad" placeholder="Ciudad / Municipio" class="input-style">
+                    
+                    <select id="tipoConsulta" class="input-style bg-white">
+                        <option value="Pedido">Realizar un Pedido</option>
+                        <option value="Cotización">Solicitar Cotización</option>
+                        <option value="Consulta">Consulta sobre el Catálogo</option>
+                    </select>
                 </div>
             </div>
 
@@ -55,8 +72,8 @@
                     <div class="flex items-center space-x-4">
                         <i class="fab fa-whatsapp text-2xl"></i>
                         <div class="text-left">
-                            <span class="block text-lg font-bold leading-none">Pedido Directo</span>
-                            <span class="text-[10px] opacity-80 uppercase">Chat con el asesor</span>
+                            <span class="block text-lg font-bold leading-none">Enviar al Asesor</span>
+                            <span class="text-[10px] opacity-80 uppercase">Atención inmediata</span>
                         </div>
                     </div>
                     <i class="fas fa-paper-plane opacity-50"></i>
@@ -71,38 +88,51 @@
                     <i class="fas fa-file-pdf opacity-50"></i>
                 </a>
 
-                <a href="https://www.google.com/maps/search/Centro+Empresarial+El+Triunfo+Monteria" target="_blank" 
+                <a href="https://maps.google.com/?q=Centro+Empresarial+El+Triunfo+Monteria" target="_blank" 
                    class="btn-action flex items-center space-x-4 p-4 bg-blue-50 border border-blue-100 rounded-2xl hover:bg-blue-100">
                     <div class="bg-blue-600 p-3 rounded-xl text-white">
                         <i class="fas fa-map-marked-alt"></i>
                     </div>
                     <div class="text-sm">
                         <p class="font-bold text-blue-700">Centro Empresarial El Triunfo</p>
-                        <p class="text-blue-500 text-xs italic font-medium underline">Abrir GPS en Google Maps</p>
+                        <p class="text-blue-500 text-xs italic font-medium underline">Ver ubicación GPS</p>
                     </div>
                 </a>
             </div>
         </div>
 
-        <div class="bg-gray-900 py-3 text-center">
-            <span class="text-[10px] text-gray-500 uppercase tracking-[0.2em]">Energía Durable, Potente y Segura</span>
+        <div class="bg-gray-900 py-4 text-center px-4">
+            <span class="text-[10px] text-gray-400 uppercase tracking-[0.2em] block mb-2">Energía que no se detiene</span>
+            <div class="pt-2 border-t border-gray-800">
+                <p class="text-[9px] text-gray-500">
+                    App desarrollada por <span class="text-white font-bold">Vibras Positivas</span> &copy; 2026<br>
+                    Todos los derechos reservados
+                </p>
+            </div>
         </div>
     </div>
 
     <script>
         function enviarWhatsApp() {
             const nombre = document.getElementById('clienteNombre').value;
+            const celular = document.getElementById('clienteCelular').value;
             const ciudad = document.getElementById('clienteCiudad').value;
-            const telefono = "573218973725";
+            const tipo = document.getElementById('tipoConsulta').value;
+            const asesorNum = "573218973725";
             
-            if (nombre === "" || ciudad === "") {
-                alert("Por favor, ingresa tu nombre y ciudad para que el asesor pueda atenderte mejor.");
+            if (!nombre || !celular || !ciudad) {
+                alert("Por favor completa Nombre, Celular y Ciudad.");
                 return;
             }
 
-            const mensaje = `Hola Asesor Tronex! Mi nombre es *${nombre}* y te escribo desde *${ciudad}*. Me interesa hacer un pedido de productos Tronex.`;
-            const url = `https://wa.me/${telefono}?text=${encodeURIComponent(mensaje)}`;
+            const mensaje = `Hola Asesor Tronex!\n\n` +
+                            `Mi nombre es: *${nombre}*\n` +
+                            `Celular: *${celular}*\n` +
+                            `Ubicación: *${ciudad}*\n` +
+                            `Motivo: *${tipo}*\n\n` +
+                            `Me interesa recibir información sobre los productos del catálogo.`;
             
+            const url = `https://wa.me/${asesorNum}?text=${encodeURIComponent(mensaje)}`;
             window.open(url, '_blank');
         }
     </script>
