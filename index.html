@@ -8,132 +8,141 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <style>
         body {
-            /* Fondo actualizado con temática de baterías/pilas */
+            /* Fondo con pilas Tronex - Usando una imagen de alta calidad de energía */
             background: linear-gradient(rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.8)), 
-                        url('https://images.unsplash.com/photo-1625750300796-9955a86499a6?auto=format&fit=crop&q=80');
+                        url('https://images.unsplash.com/photo-1619641782842-83345180c41d?auto=format&fit=crop&q=80');
             background-size: cover;
             background-position: center;
             background-attachment: fixed;
+            font-family: 'Inter', sans-serif;
         }
         .glass-card {
             background: rgba(255, 255, 255, 0.98);
             backdrop-filter: blur(12px);
             border-radius: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.3);
         }
-        .tronex-gradient {
+        .tronex-red {
             background: linear-gradient(135deg, #ED1C24 0%, #b31217 100%);
         }
-        .btn-action {
+        .btn-hover {
             transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .input-style {
-            width: 100%;
-            padding: 0.75rem;
-            border-radius: 0.75rem;
-            border: 1px solid #e5e7eb;
-            outline: none;
-            font-size: 0.875rem;
+        .btn-hover:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.2);
         }
-        .input-style:focus {
-            box-shadow: 0 0 0 2px #ED1C24;
+        input, select {
+            border: 1px solid #e2e8f0 !important;
+        }
+        input:focus, select:focus {
+            ring: 2px;
+            ring-color: #ED1C24;
+            outline: none;
+            border-color: #ED1C24 !important;
         }
     </style>
 </head>
 <body class="min-h-screen flex items-center justify-center p-4">
 
-    <div class="glass-card w-full max-w-md shadow-2xl overflow-hidden">
+    <div class="glass-card w-full max-w-md shadow-2xl overflow-hidden animate__animated animate__fadeIn">
         
-        <div class="p-8 text-center bg-white border-b">
-            <img src="tronex.PNG" alt="Logo Tronex" class="h-20 mx-auto mb-2">
-            <h1 class="text-2xl font-black text-gray-900 tracking-tight">ASESOR TRONEX</h1>
-            <p class="text-[10px] text-gray-400 uppercase tracking-widest font-bold">Distribuidor Autorizado</p>
+        <div class="p-8 text-center bg-white border-b border-gray-100">
+            <img src="tronex.PNG" alt="Logo Tronex" class="h-20 mx-auto mb-2 drop-shadow-md">
+            <h1 class="text-2xl font-black text-gray-900 tracking-tight italic">ASESOR TRONEX</h1>
+            <p class="text-[10px] text-red-600 uppercase tracking-[0.3em] font-bold">Energía que no se detiene</p>
         </div>
 
         <div class="p-6 space-y-5">
             
             <div class="bg-gray-50 p-5 rounded-2xl border border-gray-100 shadow-inner">
-                <p class="text-xs font-bold text-gray-500 mb-3 uppercase text-center italic">Datos del Cliente</p>
+                <p class="text-[11px] font-black text-gray-400 mb-3 uppercase text-center tracking-widest">Registro de Cliente</p>
                 <div class="space-y-3">
-                    <input type="text" id="clienteNombre" placeholder="Nombre o Empresa" class="input-style">
-                    <input type="tel" id="clienteCelular" placeholder="Tu número de Celular" class="input-style">
-                    <input type="text" id="clienteCiudad" placeholder="Ciudad / Municipio" class="input-style">
+                    <input type="text" id="nombre" placeholder="Nombre o Empresa" class="w-full p-3 rounded-xl text-sm outline-none">
+                    <input type="tel" id="celular" placeholder="Número de Celular" class="w-full p-3 rounded-xl text-sm outline-none">
+                    <input type="text" id="ciudad" placeholder="Ciudad / Municipio" class="w-full p-3 rounded-xl text-sm outline-none">
                     
-                    <select id="tipoConsulta" class="input-style bg-white">
-                        <option value="Pedido">Realizar un Pedido</option>
-                        <option value="Cotización">Solicitar Cotización</option>
-                        <option value="Consulta">Consulta sobre el Catálogo</option>
+                    <select id="motivo" class="w-full p-3 rounded-xl text-sm bg-white outline-none text-gray-600 font-medium">
+                        <option value="Pedido">📦 Realizar un Pedido</option>
+                        <option value="Cotización">💰 Solicitar Cotización</option>
+                        <option value="Consulta">🔍 Consulta del Catálogo</option>
                     </select>
                 </div>
             </div>
 
             <div class="space-y-3">
-                <button onclick="enviarWhatsApp()" 
-                   class="btn-action w-full flex items-center justify-between p-4 bg-green-500 text-white rounded-2xl shadow-lg hover:scale-[1.02]">
+                
+                <button onclick="enviarMensaje()" class="btn-hover w-full flex items-center justify-between p-4 bg-green-500 text-white rounded-2xl shadow-lg">
                     <div class="flex items-center space-x-4">
-                        <i class="fab fa-whatsapp text-2xl"></i>
+                        <i class="fab fa-whatsapp text-3xl"></i>
                         <div class="text-left">
-                            <span class="block text-lg font-bold leading-none">Enviar al Asesor</span>
-                            <span class="text-[10px] opacity-80 uppercase">Atención inmediata</span>
+                            <span class="block text-lg font-bold leading-none">Contactar Asesor</span>
+                            <span class="text-[10px] opacity-90 uppercase font-medium">Atención al instante</span>
                         </div>
                     </div>
-                    <i class="fas fa-paper-plane opacity-50"></i>
+                    <i class="fas fa-chevron-right opacity-50"></i>
                 </button>
 
-                <a href="tronex1.pdf" target="_blank" 
-                   class="btn-action flex items-center justify-between p-4 tronex-gradient text-white rounded-2xl shadow-lg hover:scale-[1.02]">
+                <a href="tronex1.pdf" target="_blank" class="btn-hover flex items-center justify-between p-4 tronex-red text-white rounded-2xl shadow-lg">
                     <div class="flex items-center space-x-4">
                         <i class="fas fa-bolt text-2xl"></i>
-                        <span class="text-lg font-bold">Ver Catálogo Digital</span>
+                        <span class="text-lg font-bold italic text-yellow-300">VER CATÁLOGO</span>
                     </div>
-                    <i class="fas fa-file-pdf opacity-50"></i>
+                    <i class="fas fa-file-pdf opacity-50 text-xl"></i>
                 </a>
 
-                <a href="https://www.google.com/maps/search/Centro+Empresarial+El+Triunfo+Monteria" target="_blank" 
-                   class="btn-action flex items-center space-x-4 p-4 bg-blue-50 border border-blue-100 rounded-2xl hover:bg-blue-100">
-                    <div class="bg-blue-600 p-3 rounded-xl text-white">
-                        <i class="fas fa-map-marked-alt"></i>
+                <a href="https://www.google.com/maps/search/Centro+empresarial+el+triunfo+Monteria" target="_blank" class="btn-hover flex items-center space-x-4 p-4 bg-blue-50 border border-blue-100 rounded-2xl">
+                    <div class="bg-blue-600 p-3 rounded-xl text-white shadow-md">
+                        <i class="fas fa-location-dot"></i>
                     </div>
                     <div class="text-sm">
-                        <p class="font-bold text-blue-700">Centro Empresarial El Triunfo</p>
-                        <p class="text-blue-500 text-xs italic font-medium underline">Ver ubicación GPS</p>
+                        <p class="font-bold text-blue-900">Oficina Montería</p>
+                        <p class="text-blue-600 text-xs italic underline">Centro Empresarial El Triunfo</p>
                     </div>
                 </a>
             </div>
         </div>
 
-        <div class="bg-gray-900 py-4 text-center px-4">
-            <span class="text-[10px] text-gray-400 uppercase tracking-[0.2em] block mb-2">Energía que no se detiene</span>
-            <div class="pt-2 border-t border-gray-800">
-                <p class="text-[9px] text-gray-500">
-                    App desarrollada por <span class="text-white font-bold">Vibras Positivas</span> © 2026<br>
-                    Todos los derechos reservados
+        <div class="bg-gray-900 py-4 text-center px-4 border-t border-gray-800">
+            <div class="mb-3">
+                <p class="text-[9px] text-gray-500 leading-tight">
+                    App desarrollada por <br>
+                    <span class="text-white font-black text-xs tracking-widest uppercase">Vibras Positivas</span>
                 </p>
+                <p class="text-[8px] text-gray-600 mt-1 uppercase">Derechos de Autor © 2026</p>
+            </div>
+            <div class="flex justify-center space-x-4 text-gray-700 text-xs">
+                <span>Alkalina</span>
+                <span>•</span>
+                <span>Zinc Carbón</span>
+                <span>•</span>
+                <span>Litio</span>
             </div>
         </div>
     </div>
 
     <script>
-        function enviarWhatsApp() {
-            const nombre = document.getElementById('clienteNombre').value;
-            const celular = document.getElementById('clienteCelular').value;
-            const ciudad = document.getElementById('clienteCiudad').value;
-            const tipo = document.getElementById('tipoConsulta').value;
-            const asesorNum = "573218973725";
-            
-            if (!nombre || !celular || !ciudad) {
-                alert("Por favor completa Nombre, Celular y Ciudad.");
+        function enviarMensaje() {
+            const nom = document.getElementById('nombre').value;
+            const cel = document.getElementById('celular').value;
+            const ciu = document.getElementById('ciudad').value;
+            const mot = document.getElementById('motivo').value;
+            const wa = "573218973725"; // Número del asesor
+
+            if (!nom || !cel || !ciu) {
+                alert("⚠️ Por favor, completa tu Nombre, Celular y Ciudad para que el asesor pueda atenderte.");
                 return;
             }
 
-            const mensaje = `Hola Asesor Tronex!\n\n` +
-                            `Mi nombre es: *${nombre}*\n` +
-                            `Celular: *${celular}*\n` +
-                            `Ubicación: *${ciudad}*\n` +
-                            `Motivo: *${tipo}*\n\n` +
-                            `Me interesa recibir información sobre los productos del catálogo.`;
-            
-            const url = `https://wa.me/${asesorNum}?text=${encodeURIComponent(mensaje)}`;
-            window.open(url, '_blank');
+            const texto = `🔋 *SOLICITUD ASESOR TRONEX* 🔋\n\n` +
+                          `👤 *Cliente:* ${nom}\n` +
+                          `📱 *Celular:* ${cel}\n` +
+                          `📍 *Ubicación:* ${ciu}\n` +
+                          `🎯 *Motivo:* ${mot}\n\n` +
+                          `Hola, vengo de la App Web. Me gustaría recibir información detallada.`;
+
+            const link = `https://wa.me/${wa}?text=${encodeURIComponent(texto)}`;
+            window.open(link, '_blank');
         }
     </script>
 
